@@ -2,18 +2,27 @@ import java.util.Scanner;
 
 public class MarksCalculator {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int[] marks = new int[10];
-        int total = 0;
-        
-        // Getting input for 10 marks
-        for (int i = 0; i < 10; i++) {
-            System.out.print("Enter mark " + (i + 1) + ": ");
-            marks[i] = scanner.nextInt();
-            total += marks[i];
+        String input = System.getenv("MARKS_INPUT");
+        if (input == null || input.isEmpty()) {
+            System.out.println("No input provided.");
+            return;
         }
-        
-        // Displaying the result
+
+        String[] marksArray = input.split(",");
+        int total = 0;
+
+        // Check if we have 10 marks
+        if (marksArray.length != 10) {
+            System.out.println("Please provide exactly 10 marks.");
+            return;
+        }
+
+        // Calculate the total
+        for (int i = 0; i < 10; i++) {
+            total += Integer.parseInt(marksArray[i]);
+        }
+
+        // Display the result
         System.out.println("Total marks: " + total);
     }
 }
