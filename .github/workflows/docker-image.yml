@@ -23,9 +23,9 @@ jobs:
         key: ${{ runner.os }}-buildx-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-buildx-
-    
+
     - name: Build Docker image
       run: docker build . -t java-marks-calculator
-    
-    - name: Run Docker container
-      run: docker run -it java-marks-calculator
+
+    - name: Run Docker container with predefined input
+      run: docker run -e MARKS_INPUT="85,90,78,88,92,80,70,95,87,89" java-marks-calculator
